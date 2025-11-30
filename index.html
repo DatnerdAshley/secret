@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Gift</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+        }
+        #output {
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+        .ascii-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+        .ascii-item {
+            white-space: pre-wrap;
+            font-size: 12px;
+            line-height: 1.1;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="output"></div>
+    <div class="ascii-container">
+        <div class="ascii-item" id="christmas-tree"></div>
+        <div class="ascii-item" id="still-ascii"></div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        let currentText = '';
+
+        function slowPrint(text, delay = 10) {
+            return new Promise(resolve => {
+                let i = 0;
+                const interval = setInterval(() => {
+                    currentText += text[i];
+                    output.textContent = currentText;
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, delay);
+            });
+        }
+
+        async function hackerLoading() {
+            await slowPrint("Initializing festive payload...", 50);
+            await slowPrint("\n", 400);
+
+            for (let i = 1; i <= 25; i++) {
+                const bar = "[" + "#".repeat(i) + " ".repeat(25 - i) + "]";
+                const percent = i * 4;
+                currentText = currentText.replace(/\n$/, '') + `\r${bar} ${percent}% `;
+                output.textContent = currentText;
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            await slowPrint("\n\nPayload delivered.\n", 400);
+        }
+
+        const asciiArt = `
+       v
+        >X<
+         A
+        d$b
+      .d\\$$b.
+    .d$i$$\\$$b.
+       d$$@b
+      d\\$$$ib
+    .d$$$\\$$$b
+  .d$$@$$\\$$\\$$ib.
+      d$$i$$b
+     d\\$$$$@$b
+  .d$@$$\\$$$$$@b.
+.d$$$$i$$$\\$$$$$$b.
+        ###
+        ###
+        ### mh
+`;
+
+        const dancingAscii = `⠀⠀⠀⠀⠀⠀⠀⠀⣔⡀⠤⠤⣀⣀⠀⠀⠀⣠⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣼⠁⠻⣷⡦⣤⡀⠈⠑⠊⠀⠀⠈⠢⣄⠔⠋⠁⠉⠑⠢⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢰⣽⣤⣶⢚⣛⠋⢻⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⣲⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣸⠀⠈⡵⠚⡳⠋⠀⠤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠑⠒⠒⠂⡄⠀
+⠀⠀⠀⠀⠀⠀⢯⣄⣮⢮⡟⠀⠀⠀⠀⠀⠉⠒⠂⠠⠤⠤⠤⠄⠀⠀⠀⠀⠀⢻⡟⠛⢩⡩⢽⣯⡉⠑⢲⡇⠀
+⠀⠀⠀⠀⠀⠀⠘⢌⡶⠛⠀⠀⡠⠀⣀⡄⢀⡄⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡄⣦⣉⢣⡙⠻⢦⡾⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⠜⠀⣠⠤⠚⠓⠚⢛⣴⡟⢳⣼⣆⢰⣠⡄⠀⢀⠀⢀⠀⠀⠀⠀⠹⣹⡞⢷⣷⣀⣼⠃⠀⠀
+⠀⠀⠀⠀⠀⡠⢋⡤⡞⠀⠀⠀⠀⢀⣾⡿⠈⢲⣯⣻⣿⣻⠿⢄⣘⣄⢸⣦⠀⠀⠀⠀⣷⡇⠀⡨⢫⠃⠀⠀⠀
+⠀⠀⠀⢀⣼⢿⡟⢀⣧⠀⠀⠀⠀⢸⣿⠁⠀⠀⡮⠋⠁⠀⠀⠀⢀⣿⡶⣿⣧⠀⠀⠀⠹⠗⡊⡔⠁⠀⠀⠀⠀
+⠀⠀⠀⠉⢀⡌⡰⠛⠹⡧⣀⠀⠀⣿⠃⠀⢀⡴⡇⠀⠀⠀⠀⠀⣾⣿⠁⠈⢟⢇⠀⠀⢷⣤⡀⢡⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣸⠜⠀⢀⣠⢷⠀⠉⠓⢒⠒⠋⠉⠀⠹⣄⠀⠀⠀⢰⣿⠃⠀⠀⢸⡜⣆⠀⢸⢻⠿⣮⣇⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⡤⠚⠁⢏⠈⢆⠀⠀⠸⣀⣀⠴⠀⠀⠀⢹⠲⠄⢸⣋⣀⣀⡴⠏⣀⣾⣄⣈⡈⠀⠈⠉⠁⠀⠀⠀
+⠀⠀⠀⠀⠁⠀⠀⢰⠉⡤⠊⣷⣄⠀⠀⠀⠀⠑⠠⠔⠊⠀⠀⠀⡠⢋⣼⠗⠉⠀⠀⠀⠀⠉⠳⡄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⠋⠀⠀⣿⠟⢱⣦⣤⣀⡀⠀⠀⣀⣠⣴⠯⣾⡏⡏⠀⠐⠊⠀⠀⠀⠀⠀⠈⠆⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠚⡍⠉⢩⢿⠛⠛⠛⣏⡉⢿⠶⢾⣹⣀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡸⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⢘⡏⠀⠀⠙⠒⠒⠊⠁⢠⠃⢠⡿⠋⣵⠻⣄⠀⠀⠀⠀⠀⠀⣀⢜⠇⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⡎⠀⠒⢶⢯⣸⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠋⠀⠀⢯⠉⣙⣷⣒⠀⠀⠒⢋⡥⠊⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⣄⣀⡀⠱⡜⠀⠀⠀⠀⠀⠀⠀⢀⡼⠽⢶⣤⠄⢸⣍⢀⠌⠀⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⠟⠁⠀⠀⡀⠀⠀⠀⠀⠀⠀⠐⢹⠃⠀⡰⠀⠉⠁⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⠀⠉⠀⢸⡄⠀⠀⠀⠀⠀⠀⢠⡆⠀⠐⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠘⣄⠀⠀⣸⡿⣶⡤⣤⡤⠤⠶⠿⠷⢾⣿⣿⡍⢲⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⠫⢄⣿⠁⠀⠁⠈⠀⠀⠀⠀⠀⡆⣿⣿⣷⣀⣆⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢸⣿⣿⡍⠛⣷⡄⠙⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣷⠀⠈⠻⣦⠈⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⡄⠀⠀⠘⢧⠈⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣷⠀⠀⠀⠈⢧⠀⢦⠀⠀⠀⠀⠀⠀⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⡄⣿⣿⣿⡆⠀⠀⠀⠈⢷⡀⠳⣄⠀⠀⡰⠁⢈⣷
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣃⣿⣿⡏⠁⠀⠀⠀⠀⠈⢿⣄⠈⠓⠚⢁⡰⣋⠏
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡗⠠⠤⠤⠤⠒⠚⠉⠁⠸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠙⠻⢶⣒⡭⠜⠉⠀
+⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣀⣤⣾⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⣤⣶⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⣿⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠈⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⣿⣶⣦⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀`;
+
+        const message = "Merry Christmas! You're uh very kewl, Andrew!";
+
+        async function runEffect() {
+            currentText = '';
+            output.textContent = '';
+            await hackerLoading();
+            await slowPrint(asciiArt, 2);
+            await slowPrint("\n", 0);
+            await slowPrint(message, 50);
+            await slowPrint("\n", 0);
+
+            // Display the ASCII arts side by side
+            const christmasTreeDiv = document.getElementById('christmas-tree');
+            const stillAsciiDiv = document.getElementById('still-ascii');
+            christmasTreeDiv.textContent = asciiArt;
+            stillAsciiDiv.textContent = dancingAscii;
+        }
+
+        runEffect();
+    </script>
+</body>
+</html>
